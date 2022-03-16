@@ -5963,7 +5963,11 @@ function defaultTransform() {
 }
 
 function defaultWheelDelta(event) {
-  return -event.deltaY * (event.deltaMode === 1 ? 0.05 : event.deltaMode ? 1 : 0.002) * (event.ctrlKey ? 10 : 1);
+
+  let multiplier = event.deltaMode ? 1 : 0.002;
+  multiplier = event.deltaMode === 1 ? 0.05 : multiplier;
+
+  return -event.deltaY * multiplier * (event.ctrlKey ? 10 : 1);
 }
 
 function defaultTouchable() {
