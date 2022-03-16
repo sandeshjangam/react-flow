@@ -5965,7 +5965,10 @@ function defaultTransform() {
 function defaultWheelDelta(event) {
 
   let multiplier = event.deltaMode ? 1 : 0.002;
-  multiplier = event.deltaMode === 1 ? 0.05 : multiplier;
+
+  if (event.deltaMode === 1) {
+    multiplier = 0.05;
+  }
 
   return -event.deltaY * multiplier * (event.ctrlKey ? 10 : 1);
 }
@@ -6574,7 +6577,11 @@ var ZoomPane = function ZoomPane(_ref) {
             var point = pointer(event); // taken from https://github.com/d3/d3-zoom/blob/master/src/zoom.js
 
             var multiplier = event.deltaMode ? 1 : 0.002;
-            multiplier = event.deltaMode === 1 ? 0.05 : multiplier;
+
+            if (event.deltaMode === 1) {
+              multiplier = 0.05;
+            }
+
             var pinchDelta = -event.deltaY * multiplier * 10;
 
             var _zoom = currentZoom * Math.pow(2, pinchDelta);

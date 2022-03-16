@@ -118,7 +118,10 @@ const ZoomPane = ({
               const point = pointer(event);
               // taken from https://github.com/d3/d3-zoom/blob/master/src/zoom.js
               let multiplier = event.deltaMode ? 1 : 0.002;
-              multiplier = event.deltaMode === 1 ? 0.05 : multiplier;
+
+              if (event.deltaMode === 1) {
+                multiplier = 0.05;
+              }
 
               const pinchDelta = -event.deltaY * multiplier * 10;
               const zoom = currentZoom * Math.pow(2, pinchDelta);
